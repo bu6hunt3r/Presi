@@ -112,5 +112,18 @@ So we see, that after some conditions are met function "print_flag" gets called.
 	   0x00000000004005a8 <+98>:    mov    QWORD PTR [rbp-0x58],rax
 	   0x00000000004005ac <+102>:   mov    rax,QWORD PTR [rip+0x16d]        # 0x400720
 
+Ok, we see that there's a conditional jump to "print_flag", but it's just a lot of work to get at that point stepping the path I just presented...
+So let's do it the 
 
+### Cool way
+
+	$ r2 -Aw ./jumparound
+		[0x00400626]> axt @ `iz~Well | awk -F" " '{print $1}' | awk -F"vaddr=" '{print $2}'`
+		0x004006e8
+		data 0x40046d mov rdi, main in entry0
+Short jump (just subttract size of op [2 bytes] from current address to jump loc to get operand)
+	$ !rasm2 -a x86 -b 64 "jmp 0x13"
+	eb11
+
+Alternative using tunz/binch github repo tool for patching
 	
