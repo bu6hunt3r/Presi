@@ -70,7 +70,9 @@ Let's grab contents of main function with objdump:
 	  400653:       66 2e 0f 1f 84 00 00    nop    WORD PTR cs:[rax+rax*1+0x0]
 	  40065a:       00 00 00 
 	  40065d:       0f 1f 00                nop    DWORD PTR [rax]
+
 Or do it in batch mode with gdb if you like:
+
 	$ gdb --batch -ex "disassemble main" ./jumparound                                                                        git:master*
 	Dump of assembler code for function main:
 	   0x0000000000400626 <+0>:     push   rbp
