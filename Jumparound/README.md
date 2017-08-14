@@ -32,3 +32,13 @@ We could search for interesting ascii-encoded strings in binary with help of str
 	[...snip...]
 
 But there's the disadvantage, that we actually don't know the absolute location of any of the found strings relative to binary's position in Access Memory.
+
+There's one rather promising string, let's pick "Well done jumping...". You could encode the first keyword for example by hand, or use your python coding skill's...
+ 
+	$ python -c 'a="Well"; print a.encode("hex")'
+	57656c6c
+
+Then use some grep mechanisms to get absolute loc of it relative to base address...(should be 0x400000)
+
+	$ od -A x -t x1 ./jumparound | grep "57 65 6c 6c"                                                                         git:master
+	0006e0 01 00 02 00 00 00 00 00 57 65 6c 6c 20 64 6f 6e
